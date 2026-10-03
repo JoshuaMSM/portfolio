@@ -100,7 +100,7 @@ export default function Home() {
           </section>
 
           {/* Architecture */}
-          <section
+          {/* <section
             id="architecture"
             className="scroll-mt-24"
           >
@@ -108,7 +108,7 @@ export default function Home() {
               title="Architecture Case Studies"
               items={architectureCases}
             />
-          </section>
+          </section> */}
 
           {/* Footer */}
           <Footer />

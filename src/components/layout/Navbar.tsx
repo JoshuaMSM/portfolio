@@ -7,8 +7,8 @@ const navigation = [
   { label: "Home", href: "#home" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
-  { label: "Architecture", href: "#architecture" },
-  { label: "Skills", href: "#skills" },
+  //{ label: "Architecture", href: "#architecture" },
+  { label: "Skills", href: "#skills-section" },
   { label: "Certifications", href: "#certifications" },
   { label: "About", href: "#about" },
 ];
@@ -80,6 +80,7 @@ export default function Navbar() {
 
   const handleViewProfile = () => {
     setProfileOpen(false);
+    setMenuOpen(false);
 
     document.getElementById("about")?.scrollIntoView({
       behavior: "smooth",
@@ -89,6 +90,7 @@ export default function Navbar() {
 
   const handleContact = () => {
     setProfileOpen(false);
+    setMenuOpen(false);
 
     document.getElementById("contact")?.scrollIntoView({
       behavior: "smooth",
@@ -106,9 +108,6 @@ export default function Navbar() {
 
       {/* =====================================================
           NAVBAR CONTENT
-
-          Uses the same responsive gutter system as the
-          Hero, content rows and Footer.
       ====================================================== */}
 
       <div className="relative flex h-20 w-full items-center px-6 lg:px-10 2xl:px-14">
@@ -187,7 +186,7 @@ export default function Navbar() {
             </button>
 
             {/* =================================================
-                PROFILE CARD
+                DESKTOP PROFILE CARD
             ================================================== */}
 
             <div
@@ -198,9 +197,7 @@ export default function Navbar() {
               }`}
             >
               <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#080607]/95 shadow-[0_25px_80px_rgba(0,0,0,0.65)] backdrop-blur-2xl">
-                {/* =================================================
-                    CARD ATMOSPHERE
-                ================================================== */}
+                {/* CARD ATMOSPHERE */}
 
                 <div
                   className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-red-700/20 blur-[90px]"
@@ -212,13 +209,10 @@ export default function Navbar() {
                   aria-hidden="true"
                 />
 
-                {/* =================================================
-                    PROFILE HEADER
-                ================================================== */}
+                {/* PROFILE HEADER */}
 
                 <div className="relative border-b border-white/10 p-6">
                   <div className="flex items-start gap-4">
-                    {/* Initials */}
                     <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-red-500/30 bg-gradient-to-br from-red-600/20 to-red-950/30 text-lg font-black tracking-tight text-red-500 shadow-[0_0_30px_rgba(220,38,38,0.12)]">
                       JS
                     </div>
@@ -243,15 +237,11 @@ export default function Navbar() {
                   </div>
                 </div>
 
-                {/* =================================================
-                    QUICK STATS
-                ================================================== */}
+                {/* QUICK STATS */}
 
                 <div className="relative grid grid-cols-3 border-b border-white/10">
                   <div className="border-r border-white/10 px-4 py-4 text-center">
-                    <p className="text-base font-bold text-white">
-                      7+
-                    </p>
+                    <p className="text-base font-bold text-white">7+</p>
 
                     <p className="mt-1 text-[9px] uppercase tracking-[0.16em] text-white/35">
                       Years
@@ -259,9 +249,7 @@ export default function Navbar() {
                   </div>
 
                   <div className="border-r border-white/10 px-4 py-4 text-center">
-                    <p className="text-base font-bold text-white">
-                      Java
-                    </p>
+                    <p className="text-base font-bold text-white">Java</p>
 
                     <p className="mt-1 text-[9px] uppercase tracking-[0.16em] text-white/35">
                       Backend
@@ -269,9 +257,7 @@ export default function Navbar() {
                   </div>
 
                   <div className="px-4 py-4 text-center">
-                    <p className="text-base font-bold text-white">
-                      AI/ML
-                    </p>
+                    <p className="text-base font-bold text-white">AI/ML</p>
 
                     <p className="mt-1 text-[9px] uppercase tracking-[0.16em] text-white/35">
                       Focus
@@ -279,9 +265,7 @@ export default function Navbar() {
                   </div>
                 </div>
 
-                {/* =================================================
-                    CURRENT FOCUS
-                ================================================== */}
+                {/* CURRENT FOCUS */}
 
                 <div className="relative p-6">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-red-500">
@@ -303,9 +287,7 @@ export default function Navbar() {
                     ))}
                   </div>
 
-                  {/* =================================================
-                      EDUCATION
-                  ================================================== */}
+                  {/* EDUCATION */}
 
                   <div className="mt-6 border-t border-white/10 pt-5">
                     <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/35">
@@ -321,9 +303,7 @@ export default function Navbar() {
                     </p>
                   </div>
 
-                  {/* =================================================
-                      ACTIONS
-                  ================================================== */}
+                  {/* ACTIONS */}
 
                   <div className="mt-6 grid grid-cols-2 gap-2">
                     <button
@@ -344,7 +324,8 @@ export default function Navbar() {
                   </div>
                 </div>
 
-                {/* Bottom red accent */}
+                {/* BOTTOM ACCENT */}
+
                 <div className="h-px bg-gradient-to-r from-transparent via-red-500/50 to-transparent" />
               </div>
             </div>
@@ -394,7 +375,7 @@ export default function Navbar() {
       <div
         className={`absolute left-0 right-0 top-20 overflow-hidden border-t border-white/10 bg-[#080607]/95 backdrop-blur-xl transition-all duration-300 xl:hidden ${
           menuOpen
-            ? "max-h-[650px] opacity-100"
+            ? "max-h-[1000px] overflow-y-auto opacity-100"
             : "pointer-events-none max-h-0 opacity-0"
         }`}
       >
@@ -411,6 +392,8 @@ export default function Navbar() {
               </a>
             ))}
 
+            {/* RESUME */}
+
             <button
               type="button"
               onClick={() => {
@@ -421,6 +404,8 @@ export default function Navbar() {
             >
               Resume
             </button>
+
+            {/* COVER LETTER */}
 
             <button
               type="button"
@@ -433,18 +418,183 @@ export default function Navbar() {
               Cover Letter
             </button>
 
-            {/* Mobile profile */}
+            {/* =================================================
+                MOBILE PROFILE TOGGLE
+            ================================================== */}
+
             <button
               type="button"
               onClick={() => setProfileOpen((open) => !open)}
-              className="flex items-center gap-3 py-4 text-left text-sm font-semibold text-white/70 transition-colors duration-300 hover:text-white"
+              className="flex items-center justify-between border-b border-white/5 py-4 text-left text-sm font-semibold text-white/70 transition-colors duration-300 hover:text-white"
+              aria-expanded={profileOpen}
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-white/10">
-                <User size={15} />
+              <span className="flex items-center gap-3">
+                <span
+                  className={`flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 ${
+                    profileOpen
+                      ? "border-red-500/50 bg-red-500/10 text-white"
+                      : "border-white/20 bg-white/10 text-white/70"
+                  }`}
+                >
+                  {profileOpen ? <X size={15} /> : <User size={15} />}
+                </span>
+
+                Profile
               </span>
 
-              Profile
+              <span
+                className={`text-xs text-white/30 transition-transform duration-300 ${
+                  profileOpen ? "rotate-180" : ""
+                }`}
+              >
+                ↓
+              </span>
             </button>
+
+            {/* =================================================
+                MOBILE PROFILE CARD
+            ================================================== */}
+
+            <div
+              className={`overflow-hidden transition-all duration-300 ${
+                profileOpen
+                  ? "max-h-[650px] py-4 opacity-100"
+                  : "pointer-events-none max-h-0 py-0 opacity-0"
+              }`}
+            >
+              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#080607]/90 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+                {/* ATMOSPHERE */}
+
+                <div
+                  className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-red-700/20 blur-[70px]"
+                  aria-hidden="true"
+                />
+
+                <div
+                  className="pointer-events-none absolute -bottom-24 -left-16 h-44 w-44 rounded-full bg-red-950/30 blur-[70px]"
+                  aria-hidden="true"
+                />
+
+                {/* HEADER */}
+
+                <div className="relative border-b border-white/10 p-5">
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-red-500/30 bg-gradient-to-br from-red-600/20 to-red-950/30 text-base font-black tracking-tight text-red-500">
+                      JS
+                    </div>
+
+                    <div className="min-w-0">
+                      <h3 className="text-base font-bold tracking-tight text-white">
+                        JOSHUA
+                      </h3>
+
+                      <p className="mt-0.5 text-xs text-white/45">
+                        Israel Muthu S
+                      </p>
+
+                      <p className="mt-2 text-[11px] font-medium text-white/65">
+                        Senior Backend Engineer
+                      </p>
+
+                      <p className="text-[11px] text-white/40">
+                        Technical Lead
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* STATS */}
+
+                <div className="relative grid grid-cols-3 border-b border-white/10">
+                  <div className="border-r border-white/10 px-3 py-3 text-center">
+                    <p className="text-sm font-bold text-white">7+</p>
+
+                    <p className="mt-1 text-[8px] uppercase tracking-[0.14em] text-white/35">
+                      Years
+                    </p>
+                  </div>
+
+                  <div className="border-r border-white/10 px-3 py-3 text-center">
+                    <p className="text-sm font-bold text-white">Java</p>
+
+                    <p className="mt-1 text-[8px] uppercase tracking-[0.14em] text-white/35">
+                      Backend
+                    </p>
+                  </div>
+
+                  <div className="px-3 py-3 text-center">
+                    <p className="text-sm font-bold text-white">AI/ML</p>
+
+                    <p className="mt-1 text-[8px] uppercase tracking-[0.14em] text-white/35">
+                      Focus
+                    </p>
+                  </div>
+                </div>
+
+                {/* DETAILS */}
+
+                <div className="relative p-5">
+                  <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-red-500">
+                    Current Focus
+                  </p>
+
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {[
+                      "Cloud Architecture",
+                      "Enterprise Modernization",
+                      "AI Systems",
+                    ].map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1.5 text-[10px] text-white/60"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* EDUCATION */}
+
+                  <div className="mt-5 border-t border-white/10 pt-4">
+                    <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-white/35">
+                      Education
+                    </p>
+
+                    <p className="mt-2 text-xs font-medium text-white/75">
+                      M.Tech AI / ML
+                    </p>
+
+                    <p className="mt-1 text-[10px] text-white/40">
+                      BITS Pilani • WILP
+                    </p>
+                  </div>
+
+                  {/* ACTIONS */}
+
+                  <div className="mt-5 grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={handleViewProfile}
+                      className="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5 text-[10px] font-semibold text-white/70 transition-all duration-300 hover:border-red-500/40 hover:bg-red-600/10 hover:text-white"
+                    >
+                      View Profile
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleContact}
+                      className="rounded-lg border border-red-500/30 bg-red-600/10 px-3 py-2.5 text-[10px] font-semibold text-red-400 transition-all duration-300 hover:border-red-500/60 hover:bg-red-600/20 hover:text-red-300"
+                    >
+                      Contact Me
+                    </button>
+                  </div>
+                </div>
+
+                {/* ACCENT */}
+
+                <div className="h-px bg-gradient-to-r from-transparent via-red-500/50 to-transparent" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
