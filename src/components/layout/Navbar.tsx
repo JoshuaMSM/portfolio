@@ -7,7 +7,6 @@ const navigation = [
   { label: "Home", href: "#home" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
-  //{ label: "Architecture", href: "#architecture" },
   { label: "Skills", href: "#skills-section" },
   { label: "Certifications", href: "#certifications" },
   { label: "About", href: "#about" },
@@ -29,11 +28,31 @@ export default function Navbar() {
 
   const closeMenu = () => {
     setMenuOpen(false);
+    setProfileOpen(false);
   };
 
   const closeProfile = () => {
     setProfileOpen(false);
   };
+
+  /* =========================================================
+     LOCK BACKGROUND SCROLL WHEN MOBILE MENU IS OPEN
+  ========================================================== */
+
+  useEffect(() => {
+    if (!menuOpen) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    const originalOverflow = document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [menuOpen]);
 
   /* =========================================================
      CLOSE PROFILE WHEN CLICKING OUTSIDE
@@ -119,7 +138,6 @@ export default function Navbar() {
           href="#home"
           onClick={() => {
             closeMenu();
-            closeProfile();
           }}
           className="shrink-0 text-xl font-black tracking-tight text-red-600 transition-opacity duration-300 hover:opacity-80"
         >
@@ -167,7 +185,7 @@ export default function Navbar() {
           </button>
 
           {/* =================================================
-              PROFILE
+              DESKTOP PROFILE
           ================================================== */}
 
           <div ref={profileRef} className="relative ml-1">
@@ -197,7 +215,7 @@ export default function Navbar() {
               }`}
             >
               <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#080607]/95 shadow-[0_25px_80px_rgba(0,0,0,0.65)] backdrop-blur-2xl">
-                {/* CARD ATMOSPHERE */}
+                {/* ATMOSPHERE */}
 
                 <div
                   className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-red-700/20 blur-[90px]"
@@ -324,8 +342,6 @@ export default function Navbar() {
                   </div>
                 </div>
 
-                {/* BOTTOM ACCENT */}
-
                 <div className="h-px bg-gradient-to-r from-transparent via-red-500/50 to-transparent" />
               </div>
             </div>
@@ -370,230 +386,250 @@ export default function Navbar() {
 
       {/* =========================================================
           MOBILE NAVIGATION
+          
+          The panel is fixed to the viewport below the navbar.
+          The website behind it is locked from scrolling.
+          Only this panel scrolls.
       ========================================================== */}
 
       <div
-        className={`absolute left-0 right-0 top-20 overflow-hidden border-t border-white/10 bg-[#080607]/95 backdrop-blur-xl transition-all duration-300 xl:hidden ${
+        className={`fixed left-0 right-0 top-20 bottom-0 z-40 bg-[#080607]/95 backdrop-blur-xl transition-all duration-300 xl:hidden ${
           menuOpen
-            ? "max-h-[1000px] overflow-y-auto opacity-100"
-            : "pointer-events-none max-h-0 opacity-0"
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-2 opacity-0"
         }`}
       >
-        <div className="w-full px-6 py-5 lg:px-10 2xl:px-14">
-          <div className="flex flex-col">
-            {navigation.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={closeMenu}
-                className="border-b border-white/5 py-4 text-sm font-medium text-white/70 transition-colors duration-300 hover:text-white"
+        <div className="h-full w-full overflow-y-auto overscroll-contain">
+          <div className="w-full px-6 py-5 lg:px-10 2xl:px-14">
+            <div className="flex flex-col">
+              {/* =================================================
+                  NAVIGATION LINKS
+              ================================================== */}
+
+              {navigation.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={closeMenu}
+                  className="border-b border-white/5 py-4 text-sm font-medium text-white/70 transition-colors duration-300 hover:text-white"
+                >
+                  {item.label}
+                </a>
+              ))}
+
+              {/* =================================================
+                  RESUME
+              ================================================== */}
+
+              <button
+                type="button"
+                onClick={() => {
+                  openDocument("resume");
+                  closeMenu();
+                }}
+                className="border-b border-white/5 py-4 text-left text-sm font-semibold text-white/80 transition-colors duration-300 hover:text-white"
               >
-                {item.label}
-              </a>
-            ))}
+                Resume
+              </button>
 
-            {/* RESUME */}
+              {/* =================================================
+                  COVER LETTER
+              ================================================== */}
 
-            <button
-              type="button"
-              onClick={() => {
-                openDocument("resume");
-                closeMenu();
-              }}
-              className="border-b border-white/5 py-4 text-left text-sm font-semibold text-white/80 transition-colors duration-300 hover:text-white"
-            >
-              Resume
-            </button>
+              <button
+                type="button"
+                onClick={() => {
+                  openDocument("cover-letter");
+                  closeMenu();
+                }}
+                className="border-b border-white/5 py-4 text-left text-sm font-semibold text-white/80 transition-colors duration-300 hover:text-white"
+              >
+                Cover Letter
+              </button>
 
-            {/* COVER LETTER */}
+              {/* =================================================
+                  MOBILE PROFILE TOGGLE
+              ================================================== */}
 
-            <button
-              type="button"
-              onClick={() => {
-                openDocument("cover-letter");
-                closeMenu();
-              }}
-              className="border-b border-white/5 py-4 text-left text-sm font-semibold text-white/80 transition-colors duration-300 hover:text-white"
-            >
-              Cover Letter
-            </button>
+              <div ref={profileRef}>
+                <button
+                  type="button"
+                  onClick={() => setProfileOpen((open) => !open)}
+                  className="flex w-full items-center justify-between border-b border-white/5 py-4 text-left text-sm font-semibold text-white/70 transition-colors duration-300 hover:text-white"
+                  aria-expanded={profileOpen}
+                >
+                  <span className="flex items-center gap-3">
+                    <span
+                      className={`flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 ${
+                        profileOpen
+                          ? "border-red-500/50 bg-red-500/10 text-white"
+                          : "border-white/20 bg-white/10 text-white/70"
+                      }`}
+                    >
+                      {profileOpen ? <X size={15} /> : <User size={15} />}
+                    </span>
 
-            {/* =================================================
-                MOBILE PROFILE TOGGLE
-            ================================================== */}
+                    Profile
+                  </span>
 
-            <button
-              type="button"
-              onClick={() => setProfileOpen((open) => !open)}
-              className="flex items-center justify-between border-b border-white/5 py-4 text-left text-sm font-semibold text-white/70 transition-colors duration-300 hover:text-white"
-              aria-expanded={profileOpen}
-            >
-              <span className="flex items-center gap-3">
-                <span
-                  className={`flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 ${
+                  <span
+                    className={`text-xs text-white/30 transition-transform duration-300 ${
+                      profileOpen ? "rotate-180" : ""
+                    }`}
+                  >
+                    ↓
+                  </span>
+                </button>
+
+                {/* =================================================
+                    MOBILE PROFILE CARD
+                ================================================== */}
+
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${
                     profileOpen
-                      ? "border-red-500/50 bg-red-500/10 text-white"
-                      : "border-white/20 bg-white/10 text-white/70"
+                      ? "max-h-[700px] py-4 opacity-100"
+                      : "pointer-events-none max-h-0 py-0 opacity-0"
                   }`}
                 >
-                  {profileOpen ? <X size={15} /> : <User size={15} />}
-                </span>
+                  <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#080607]/95 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+                    {/* ATMOSPHERE */}
 
-                Profile
-              </span>
+                    <div
+                      className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-red-700/20 blur-[70px]"
+                      aria-hidden="true"
+                    />
 
-              <span
-                className={`text-xs text-white/30 transition-transform duration-300 ${
-                  profileOpen ? "rotate-180" : ""
-                }`}
-              >
-                ↓
-              </span>
-            </button>
+                    <div
+                      className="pointer-events-none absolute -bottom-24 -left-16 h-44 w-44 rounded-full bg-red-950/30 blur-[70px]"
+                      aria-hidden="true"
+                    />
 
-            {/* =================================================
-                MOBILE PROFILE CARD
-            ================================================== */}
+                    {/* PROFILE HEADER */}
 
-            <div
-              className={`overflow-hidden transition-all duration-300 ${
-                profileOpen
-                  ? "max-h-[650px] py-4 opacity-100"
-                  : "pointer-events-none max-h-0 py-0 opacity-0"
-              }`}
-            >
-              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#080607]/90 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl">
-                {/* ATMOSPHERE */}
+                    <div className="relative border-b border-white/10 p-5">
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-red-500/30 bg-gradient-to-br from-red-600/20 to-red-950/30 text-base font-black tracking-tight text-red-500">
+                          JS
+                        </div>
 
-                <div
-                  className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-red-700/20 blur-[70px]"
-                  aria-hidden="true"
-                />
+                        <div className="min-w-0">
+                          <h3 className="text-base font-bold tracking-tight text-white">
+                            JOSHUA
+                          </h3>
 
-                <div
-                  className="pointer-events-none absolute -bottom-24 -left-16 h-44 w-44 rounded-full bg-red-950/30 blur-[70px]"
-                  aria-hidden="true"
-                />
+                          <p className="mt-0.5 text-xs text-white/45">
+                            Israel Muthu S
+                          </p>
 
-                {/* HEADER */}
+                          <p className="mt-2 text-[11px] font-medium text-white/65">
+                            Senior Backend Engineer
+                          </p>
 
-                <div className="relative border-b border-white/10 p-5">
-                  <div className="flex items-start gap-3">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-red-500/30 bg-gradient-to-br from-red-600/20 to-red-950/30 text-base font-black tracking-tight text-red-500">
-                      JS
+                          <p className="text-[11px] text-white/40">
+                            Technical Lead
+                          </p>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="min-w-0">
-                      <h3 className="text-base font-bold tracking-tight text-white">
-                        JOSHUA
-                      </h3>
+                    {/* QUICK STATS */}
 
-                      <p className="mt-0.5 text-xs text-white/45">
-                        Israel Muthu S
-                      </p>
+                    <div className="relative grid grid-cols-3 border-b border-white/10">
+                      <div className="border-r border-white/10 px-3 py-3 text-center">
+                        <p className="text-sm font-bold text-white">7+</p>
 
-                      <p className="mt-2 text-[11px] font-medium text-white/65">
-                        Senior Backend Engineer
-                      </p>
+                        <p className="mt-1 text-[8px] uppercase tracking-[0.14em] text-white/35">
+                          Years
+                        </p>
+                      </div>
 
-                      <p className="text-[11px] text-white/40">
-                        Technical Lead
-                      </p>
+                      <div className="border-r border-white/10 px-3 py-3 text-center">
+                        <p className="text-sm font-bold text-white">Java</p>
+
+                        <p className="mt-1 text-[8px] uppercase tracking-[0.14em] text-white/35">
+                          Backend
+                        </p>
+                      </div>
+
+                      <div className="px-3 py-3 text-center">
+                        <p className="text-sm font-bold text-white">AI/ML</p>
+
+                        <p className="mt-1 text-[8px] uppercase tracking-[0.14em] text-white/35">
+                          Focus
+                        </p>
+                      </div>
                     </div>
+
+                    {/* CURRENT FOCUS */}
+
+                    <div className="relative p-5">
+                      <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-red-500">
+                        Current Focus
+                      </p>
+
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {[
+                          "Cloud Architecture",
+                          "Enterprise Modernization",
+                          "AI Systems",
+                        ].map((item) => (
+                          <span
+                            key={item}
+                            className="rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1.5 text-[10px] text-white/60"
+                          >
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* EDUCATION */}
+
+                      <div className="mt-5 border-t border-white/10 pt-4">
+                        <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-white/35">
+                          Education
+                        </p>
+
+                        <p className="mt-2 text-xs font-medium text-white/75">
+                          M.Tech AI / ML
+                        </p>
+
+                        <p className="mt-1 text-[10px] text-white/40">
+                          BITS Pilani • WILP
+                        </p>
+                      </div>
+
+                      {/* ACTIONS */}
+
+                      <div className="mt-5 grid grid-cols-2 gap-2">
+                        <button
+                          type="button"
+                          onClick={handleViewProfile}
+                          className="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5 text-[10px] font-semibold text-white/70 transition-all duration-300 hover:border-red-500/40 hover:bg-red-600/10 hover:text-white"
+                        >
+                          View Profile
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={handleContact}
+                          className="rounded-lg border border-red-500/30 bg-red-600/10 px-3 py-2.5 text-[10px] font-semibold text-red-400 transition-all duration-300 hover:border-red-500/60 hover:bg-red-600/20 hover:text-red-300"
+                        >
+                          Contact Me
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* ACCENT */}
+
+                    <div className="h-px bg-gradient-to-r from-transparent via-red-500/50 to-transparent" />
                   </div>
                 </div>
-
-                {/* STATS */}
-
-                <div className="relative grid grid-cols-3 border-b border-white/10">
-                  <div className="border-r border-white/10 px-3 py-3 text-center">
-                    <p className="text-sm font-bold text-white">7+</p>
-
-                    <p className="mt-1 text-[8px] uppercase tracking-[0.14em] text-white/35">
-                      Years
-                    </p>
-                  </div>
-
-                  <div className="border-r border-white/10 px-3 py-3 text-center">
-                    <p className="text-sm font-bold text-white">Java</p>
-
-                    <p className="mt-1 text-[8px] uppercase tracking-[0.14em] text-white/35">
-                      Backend
-                    </p>
-                  </div>
-
-                  <div className="px-3 py-3 text-center">
-                    <p className="text-sm font-bold text-white">AI/ML</p>
-
-                    <p className="mt-1 text-[8px] uppercase tracking-[0.14em] text-white/35">
-                      Focus
-                    </p>
-                  </div>
-                </div>
-
-                {/* DETAILS */}
-
-                <div className="relative p-5">
-                  <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-red-500">
-                    Current Focus
-                  </p>
-
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {[
-                      "Cloud Architecture",
-                      "Enterprise Modernization",
-                      "AI Systems",
-                    ].map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1.5 text-[10px] text-white/60"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* EDUCATION */}
-
-                  <div className="mt-5 border-t border-white/10 pt-4">
-                    <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-white/35">
-                      Education
-                    </p>
-
-                    <p className="mt-2 text-xs font-medium text-white/75">
-                      M.Tech AI / ML
-                    </p>
-
-                    <p className="mt-1 text-[10px] text-white/40">
-                      BITS Pilani • WILP
-                    </p>
-                  </div>
-
-                  {/* ACTIONS */}
-
-                  <div className="mt-5 grid grid-cols-2 gap-2">
-                    <button
-                      type="button"
-                      onClick={handleViewProfile}
-                      className="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5 text-[10px] font-semibold text-white/70 transition-all duration-300 hover:border-red-500/40 hover:bg-red-600/10 hover:text-white"
-                    >
-                      View Profile
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={handleContact}
-                      className="rounded-lg border border-red-500/30 bg-red-600/10 px-3 py-2.5 text-[10px] font-semibold text-red-400 transition-all duration-300 hover:border-red-500/60 hover:bg-red-600/20 hover:text-red-300"
-                    >
-                      Contact Me
-                    </button>
-                  </div>
-                </div>
-
-                {/* ACCENT */}
-
-                <div className="h-px bg-gradient-to-r from-transparent via-red-500/50 to-transparent" />
               </div>
+
+              {/* Bottom breathing space */}
+
+              <div className="h-8" />
             </div>
           </div>
         </div>
