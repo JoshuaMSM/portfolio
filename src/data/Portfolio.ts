@@ -1,6 +1,6 @@
 export const profile = {
   name: "JOSHUA",
-  title: "Software Engineer | Technical Lead",
+  title: "APPLIED AI-CLOUD FULL-STACK DEVELOPER | Technical Lead",
   tagline: "Building scalable systems, cloud solutions and AI-powered products.",
   experience: "7+ Years Experience",
   location: "Chennai, India",

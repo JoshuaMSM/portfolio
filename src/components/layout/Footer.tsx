@@ -74,7 +74,7 @@ export default function Footer() {
             <h2 className="text-4xl font-black leading-[0.95] tracking-[-0.04em] text-white sm:text-5xl md:text-6xl lg:text-7xl">
               LET&apos;S BUILD
               <br />
-              <span className="text-white/90">SOMETHING GREAT.</span>
+              <span className="text-white/90">SOMETHING Intelligent.</span>
             </h2>
 
             <p className="mt-6 max-w-2xl text-base leading-7 text-white/55 md:text-lg md:leading-8">
@@ -131,7 +131,7 @@ export default function Footer() {
               </div>
 
               <p className="mt-2 text-sm font-medium text-white/70">
-                Senior Backend Engineer • Technical Lead
+                Applied AI-Cloud Full-Stack Developer • Technical Lead
               </p>
 
               <p className="mt-2 text-xs tracking-wide text-white/35">

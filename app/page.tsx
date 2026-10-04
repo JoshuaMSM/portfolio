@@ -6,12 +6,16 @@ import Hero from "@/src/components/hero/Hero";
 import ContentRow from "@/src/components/content/ContentRow";
 import SkillsSection from "@/src/components/skills/SkillsSection";
 import CertificationsSection from "@/src/components/certifications/CertificationsSection";
+import ImpactSection from "@/src/components/impact/ImpactSection";
 
 import { experiences } from "@/src/data/experience";
 
 import BackToTop from "@/src/components/layout/BackToTop";
 import Protection from "@/src/components/layout/Protection";
 import LoadingScreen from "@/src/components/layout/LoadingScreen";
+
+import GlobalOpportunities from "@/src/components/global/GlobalOpportunities";
+import IndustriesSection from "@/src/components/industries/IndustriesSection";
 
 import {
   featuredProjects,
@@ -35,6 +39,13 @@ export default function Home() {
         <Hero />
 
         <div className="relative z-20 mx-auto -mt-24 w-full px-6 lg:px-10 2xl:px-14">
+
+          {/* Selected Impact */}
+          <ImpactSection />
+
+          {/* Global Opportunities */}
+          <GlobalOpportunities />
+
           {/* Featured Technical Work */}
           <div
             id="projects"
@@ -87,6 +98,9 @@ export default function Home() {
           >
             <CertificationsSection />
           </section>
+
+          {/* Industries */}
+          <IndustriesSection />
 
           {/* Continue Exploring */}
           <section

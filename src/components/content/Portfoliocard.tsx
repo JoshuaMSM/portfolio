@@ -170,30 +170,34 @@ type ExploreItem = {
 
 const exploreItems: Record<string, ExploreItem> = {
   about: {
-    id: "about",
-    category: "Profile",
-    eyebrow: "ABOUT ME",
-    title: "From Code to Real-World Impact",
-    subtitle: "Senior Backend Engineer • Technical Lead",
-    overview:
-      "Senior Backend Engineer and Technical Lead with 7+ years delivering enterprise backend platforms across Financial Services, Healthcare, Airline Loyalty, and SaaS.",
-    icon: "about",
-    highlights: [
-      "Deep experience across Java 17, Spring Boot, microservices, PostgreSQL, Redis, Kafka and AWS.",
-      "Hands-on work spanning cloud transformation, modernization, performance optimization and production engineering.",
-      "Led and mentored engineering teams of up to 10 across architecture reviews, sprint planning and production operations.",
-      "Currently building further depth in Python ETL workflows with Airflow and BigQuery.",
-    ],
-    technologies: [
-      "Java 17",
-      "Spring Boot",
-      "Microservices",
-      "AWS",
-      "Python",
-      "Airflow",
-      "BigQuery",
-    ],
-  },
+  id: "about",
+  category: "Profile",
+  eyebrow: "ABOUT ME",
+  title: "From Code to Real-World Impact",
+  subtitle: "Applied AI-Cloud Full-Stack Developer • Technical Lead",
+
+  overview:
+    "Applied AI-Cloud Full-Stack Developer with 7+ years of software engineering experience across backend engineering, cloud platforms, distributed systems and enterprise modernization. Building on a strong Java and microservices foundation, my current focus extends into applied AI, cloud-native development, data engineering and modern full-stack solutions.",
+
+  icon: "about",
+
+  highlights: [
+    "Strong engineering foundation across Java 17, Spring Boot, microservices, PostgreSQL, Redis, Kafka and AWS.",
+    "Hands-on experience delivering cloud transformation, application modernization, CI/CD automation, performance optimization and production engineering.",
+    "Led and mentored engineering teams of up to 10 across technical decisions, architecture reviews, sprint planning and production operations.",
+    "Expanding into applied AI and cloud full-stack engineering through Python, AI/ML, ETL workflows, Airflow, BigQuery and modern cloud platforms.",
+  ],
+
+  technologies: [
+    "Java 17",
+    "Spring Boot",
+    "AWS",
+    "Python",
+    "AI / ML",
+    "Airflow",
+    "BigQuery",
+  ],
+},
   education: {
     id: "education",
     category: "Education",

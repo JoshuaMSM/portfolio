@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { profile } from "@/src/data/Portfolio";
+import { profile1 } from "@/src/data/profile";
 
 export default function Hero() {
   return (
@@ -84,7 +85,7 @@ export default function Hero() {
           <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3 text-sm text-gray-200">
             <MetaItem
               icon={<BriefcaseBusiness size={15} />}
-              text={profile.experience}
+              text={profile1.getExperienceLabel()}
             />
 
             <span className="hidden text-gray-500 sm:block">|</span>
@@ -93,7 +94,7 @@ export default function Hero() {
 
             <span className="hidden text-gray-500 sm:block">|</span>
 
-            <MetaItem icon={<Cloud size={15} />} text="AWS" />
+            <MetaItem icon={<Cloud size={15} />} text="Cloud" />
 
             <span className="hidden text-gray-500 sm:block">|</span>
 

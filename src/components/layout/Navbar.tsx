@@ -523,7 +523,7 @@ export default function Navbar() {
                           </p>
 
                           <p className="mt-2 text-[11px] font-medium text-white/65">
-                            Senior Backend Engineer
+                            Applied AI – Cloud Full-Stack Developer
                           </p>
 
                           <p className="text-[11px] text-white/40">
@@ -572,7 +572,7 @@ export default function Navbar() {
                         {[
                           "Cloud Architecture",
                           "Enterprise Modernization",
-                          "AI Systems",
+                          "Applied AI Systems",
                         ].map((item) => (
                           <span
                             key={item}
